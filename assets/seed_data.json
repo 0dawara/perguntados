@@ -1,0 +1,320 @@
+{
+  "categories": [
+    {
+      "name": "Geografia",
+      "color": "#2196F3"
+    },
+    {
+      "name": "Ciências",
+      "color": "#4CAF50"
+    },
+    {
+      "name": "Esportes",
+      "color": "#FF9800"
+    },
+    {
+      "name": "História",
+      "color": "#FFD700"
+    },
+    {
+      "name": "Pop",
+      "color": "#E91E63"
+    },
+    {
+      "name": "Artes",
+      "color": "#F44336"
+    },
+    {
+      "name": "Coroa",
+      "color": "#9C27B0"
+    }
+  ],
+  "questions": [
+    {
+      "text": "Qual o maior país do mundo em extensão territorial?",
+      "category": "Geografia",
+      "options": [
+        "Brasil",
+        "Canadá",
+        "Estados Unidos",
+        "Rússia"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Qual é a capital da Austrália?",
+      "category": "Geografia",
+      "options": [
+        "Sydney",
+        "Melbourne",
+        "Canberra",
+        "Brisbane"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual é o maior oceano da Terra?",
+      "category": "Geografia",
+      "options": [
+        "Oceano Atlântico",
+        "Oceano Índico",
+        "Oceano Ártico",
+        "Oceano Pacífico"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Em qual continente fica o deserto do Saara?",
+      "category": "Geografia",
+      "options": [
+        "Ásia",
+        "África",
+        "América do Sul",
+        "Oceania"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual planeta é conhecido como o Planeta Vermelho?",
+      "category": "Ciências",
+      "options": [
+        "Vênus",
+        "Júpiter",
+        "Marte",
+        "Saturno"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual é a fórmula química da água?",
+      "category": "Ciências",
+      "options": [
+        "CO2",
+        "H2O",
+        "O2",
+        "NaCl"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem propôs a teoria da relatividade?",
+      "category": "Ciências",
+      "options": [
+        "Isaac Newton",
+        "Nikola Tesla",
+        "Albert Einstein",
+        "Galileu Galilei"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Como é chamada a organela responsável pela respiração celular?",
+      "category": "Ciências",
+      "options": [
+        "Mitocôndria",
+        "Ribossomo",
+        "Citoplasma",
+        "Núcleo"
+      ],
+      "correctAnswerIndex": 0
+    },
+    {
+      "text": "Qual país venceu a Copa do Mundo de 2002?",
+      "category": "Esportes",
+      "options": [
+        "Alemanha",
+        "Itália",
+        "Brasil",
+        "Argentina"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Quantos jogadores formam uma equipe titular de vôlei de quadra?",
+      "category": "Esportes",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "11"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "De onde é originária a arte marcial Judô?",
+      "category": "Esportes",
+      "options": [
+        "China",
+        "Coreia do Sul",
+        "Japão",
+        "Tailândia"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual é a distância oficial de uma maratona?",
+      "category": "Esportes",
+      "options": [
+        "21,097 km",
+        "42,195 km",
+        "40,000 km",
+        "50,000 km"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem descobriu o Brasil?",
+      "category": "História",
+      "options": [
+        "Pedro Álvares Cabral",
+        "Cristóvão Colombo",
+        "Vasco da Gama",
+        "Dom Pedro I"
+      ],
+      "correctAnswerIndex": 0
+    },
+    {
+      "text": "Em que ano começou a Segunda Guerra Mundial?",
+      "category": "História",
+      "options": [
+        "1914",
+        "1939",
+        "1945",
+        "1989"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem foi o primeiro presidente do Brasil?",
+      "category": "História",
+      "options": [
+        "Getúlio Vargas",
+        "Deodoro da Fonseca",
+        "Juscelino Kubitschek",
+        "Floriano Peixoto"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "A Revolução Francesa iniciou em qual ano?",
+      "category": "História",
+      "options": [
+        "1492",
+        "1789",
+        "1822",
+        "1914"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual série de TV tem personagens como Jon Snow e Daenerys Targaryen?",
+      "category": "Pop",
+      "options": [
+        "Breaking Bad",
+        "The Witcher",
+        "Game of Thrones",
+        "Vikings"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Quem é mundialmente conhecida como a 'Rainha do Pop'?",
+      "category": "Pop",
+      "options": [
+        "Beyoncé",
+        "Lady Gaga",
+        "Britney Spears",
+        "Madonna"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Qual foi o filme de maior bilheteria dirigido por James Cameron em 2009?",
+      "category": "Pop",
+      "options": [
+        "Titanic",
+        "Avatar",
+        "Vingadores",
+        "Star Wars"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual é o nome da identidade secreta do Homem-Aranha?",
+      "category": "Pop",
+      "options": [
+        "Bruce Wayne",
+        "Clark Kent",
+        "Peter Parker",
+        "Barry Allen"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Quem escreveu 'Dom Casmurro'?",
+      "category": "Artes",
+      "options": [
+        "José de Alencar",
+        "Machado de Assis",
+        "Monteiro Lobato",
+        "Graciliano Ramos"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem pintou a 'Mona Lisa'?",
+      "category": "Artes",
+      "options": [
+        "Vincent van Gogh",
+        "Pablo Picasso",
+        "Leonardo da Vinci",
+        "Michelangelo"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual instrumento musical possui teclas pretas e brancas?",
+      "category": "Artes",
+      "options": [
+        "Violão",
+        "Bateria",
+        "Flauta",
+        "Piano"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Como é chamado o estilo de arte com formas geométricas criado por Pablo Picasso?",
+      "category": "Artes",
+      "options": [
+        "Surrealismo",
+        "Impressionismo",
+        "Cubismo",
+        "Expressionismo"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual elemento químico tem o símbolo 'Au'?",
+      "category": "Coroa",
+      "options": [
+        "Prata",
+        "Ouro",
+        "Cobre",
+        "Alumínio"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem pintou o teto da Capela Sistina?",
+      "category": "Coroa",
+      "options": [
+        "Leonardo da Vinci",
+        "Michelangelo",
+        "Raphael",
+        "Donatello"
+      ],
+      "correctAnswerIndex": 1
+    }
+  ]
+}
