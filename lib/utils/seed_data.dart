@@ -1,98 +1,145 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
-Future<void> seedDatabase() async {
-  // Verify if categories already exist
-  final query = QueryBuilder<ParseObject>(ParseObject('Category'));
-  final countResponse = await query.count();
-  if (countResponse.success && countResponse.count > 0) {
-    debugPrint('Database already seeded.');
+bool _isSeeding = false;
+
+Future<void> seedDatabase({bool force = false}) async {
+  if (_isSeeding) {
+    debugPrint(
+      '[SEED] Sincronização já está em andamento. Ignorando nova chamada.',
+    );
     return;
   }
+  _isSeeding = true;
 
-  debugPrint('Seeding database...');
+  try {
+    if (force) {
+      debugPrint('[SEED] Forçando limpeza do banco de dados...');
 
-  // Create Categories
-  final mathCat = ParseObject('Category')
-    ..set('name', 'Matemática')
-    ..set('color', '#F44336'); // Red
-  final histCat = ParseObject('Category')
-    ..set('name', 'História')
-    ..set('color', '#FF9800'); // Orange
-  final geoCat = ParseObject('Category')
-    ..set('name', 'Geografia')
-    ..set('color', '#4CAF50'); // Green
-  final langCat = ParseObject('Category')
-    ..set('name', 'Linguagens')
-    ..set('color', '#2196F3'); // Blue
+      // Delete all existing Questions
+      debugPrint('[SEED] Buscando Questões para deletar...');
+      final qQuery = QueryBuilder<ParseObject>(ParseObject('Question'))
+        ..setLimit(1000);
+      final qResponse = await qQuery.query();
+      if (qResponse.success && qResponse.results != null) {
+        final questionsToDelete = qResponse.results as List<ParseObject>;
+        debugPrint(
+          '[SEED] Deletando ${questionsToDelete.length} questões antigas...',
+        );
+        for (var q in questionsToDelete) {
+          final res = await q.delete();
+          if (!res.success) {
+            debugPrint('[SEED] Erro ao deletar questão: ${res.error?.message}');
+          }
+        }
+      }
 
-  // Save categories to get objectIds
-  final catResponse = await Future.wait([
-    mathCat.save(),
-    histCat.save(),
-    geoCat.save(),
-    langCat.save(),
-  ]);
-
-  for (var res in catResponse) {
-    if (!res.success) {
-      debugPrint('Error saving category: ${res.error?.message}');
-      return;
+      // Delete all existing Categories
+      debugPrint('[SEED] Buscando Categorias para deletar...');
+      final cQuery = QueryBuilder<ParseObject>(ParseObject('Category'))
+        ..setLimit(1000);
+      final cResponse = await cQuery.query();
+      if (cResponse.success && cResponse.results != null) {
+        final categoriesToDelete = cResponse.results as List<ParseObject>;
+        debugPrint(
+          '[SEED] Deletando ${categoriesToDelete.length} categorias antigas...',
+        );
+        for (var c in categoriesToDelete) {
+          final res = await c.delete();
+          if (!res.success) {
+            debugPrint(
+              '[SEED] Erro ao deletar categoria: ${res.error?.message}',
+            );
+          }
+        }
+      }
+      debugPrint('[SEED] Limpeza concluída.');
+    } else {
+      // Verify if categories already exist
+      final query = QueryBuilder<ParseObject>(ParseObject('Category'));
+      final countResponse = await query.count();
+      if (countResponse.success && countResponse.count > 0) {
+        debugPrint(
+          '[SEED] Banco de dados já possui categorias. Sincronização ignorada.',
+        );
+        _isSeeding = false;
+        return;
+      }
     }
-  }
 
-  // Create Questions
-  final questions = [
-    ParseObject('Question')
-      ..set('text', 'Quanto é 7 x 8?')
-      ..set('category', mathCat.toPointer())
-      ..set('options', ['54', '56', '58', '62'])
-      ..set('correctAnswerIndex', 1),
-    ParseObject('Question')
-      ..set('text', 'Qual a raiz quadrada de 144?')
-      ..set('category', mathCat.toPointer())
-      ..set('options', ['10', '12', '14', '16'])
-      ..set('correctAnswerIndex', 1),
-    ParseObject('Question')
-      ..set('text', 'Quem descobriu o Brasil?')
-      ..set('category', histCat.toPointer())
-      ..set('options', ['Pedro Álvares Cabral', 'Cristóvão Colombo', 'Vasco da Gama', 'Dom Pedro I'])
-      ..set('correctAnswerIndex', 0),
-    ParseObject('Question')
-      ..set('text', 'Em que ano começou a Segunda Guerra Mundial?')
-      ..set('category', histCat.toPointer())
-      ..set('options', ['1914', '1939', '1945', '1989'])
-      ..set('correctAnswerIndex', 1),
-    ParseObject('Question')
-      ..set('text', 'Qual o maior país do mundo em extensão territorial?')
-      ..set('category', geoCat.toPointer())
-      ..set('options', ['Brasil', 'Canadá', 'Estados Unidos', 'Rússia'])
-      ..set('correctAnswerIndex', 3),
-    ParseObject('Question')
-      ..set('text', 'Qual é a capital da Austrália?')
-      ..set('category', geoCat.toPointer())
-      ..set('options', ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'])
-      ..set('correctAnswerIndex', 2),
-    ParseObject('Question')
-      ..set('text', 'Qual a figura de linguagem presente em "Ele chorou rios de lágrimas"?')
-      ..set('category', langCat.toPointer())
-      ..set('options', ['Metáfora', 'Hipérbole', 'Eufemismo', 'Ironia'])
-      ..set('correctAnswerIndex', 1),
-    ParseObject('Question')
-      ..set('text', 'Quem escreveu "Dom Casmurro"?')
-      ..set('category', langCat.toPointer())
-      ..set('options', ['José de Alencar', 'Machado de Assis', 'Monteiro Lobato', 'Graciliano Ramos'])
-      ..set('correctAnswerIndex', 1),
-  ];
+    debugPrint('[SEED] Iniciando leitura do JSON de dados...');
+    final String jsonString = await rootBundle.loadString(
+      'assets/seed_data.json',
+    );
+    final Map<String, dynamic> data = jsonDecode(jsonString);
 
-  final qResponse = await Future.wait(questions.map((q) => q.save()));
-  for (var res in qResponse) {
-    if (!res.success) {
-      debugPrint('Error saving question: ${res.error?.message}');
-      return;
+    // Parse Categories
+    final List<dynamic> categoriesData = data['categories'];
+    debugPrint(
+      '[SEED] Encontradas ${categoriesData.length} categorias no JSON.',
+    );
+
+    Map<String, ParseObject> categoryMap = {};
+
+    for (var cat in categoriesData) {
+      debugPrint('[SEED] Salvando categoria: ${cat['name']}...');
+      final obj = ParseObject('Category')
+        ..set('name', cat['name'])
+        ..set('color', cat['color']);
+
+      final res = await obj.save();
+      if (res.success) {
+        categoryMap[cat['name']] = obj; // Reference with objectId
+      } else {
+        debugPrint(
+          '[SEED] Erro ao salvar categoria ${cat['name']}: ${res.error?.message}',
+        );
+      }
     }
-  }
 
-  debugPrint('Database seeded successfully!');
+    // Parse Questions
+    final List<dynamic> questionsData = data['questions'];
+    debugPrint('[SEED] Encontradas ${questionsData.length} questões no JSON.');
+
+    int savedQuestionsCount = 0;
+    for (int i = 0; i < questionsData.length; i++) {
+      var q = questionsData[i];
+      final categoryName = q['category'];
+      final catPointer = categoryMap[categoryName]?.toPointer();
+
+      if (catPointer == null) {
+        debugPrint(
+          '[SEED] AVISO: Categoria "$categoryName" não encontrada para a questão: ${q['text']}',
+        );
+        continue;
+      }
+
+      final obj = ParseObject('Question')
+        ..set('text', q['text'])
+        ..set('category', catPointer)
+        ..set('options', List<String>.from(q['options']))
+        ..set('correctAnswerIndex', q['correctAnswerIndex']);
+
+      final res = await obj.save();
+      if (res.success) {
+        savedQuestionsCount++;
+        debugPrint(
+          '[SEED] [${i + 1}/${questionsData.length}] Questão salva com sucesso: ${q['text']}',
+        );
+      } else {
+        debugPrint('[SEED] Erro ao salvar questão: ${res.error?.message}');
+      }
+    }
+
+    debugPrint(
+      '[SEED] Sincronização concluída! Categorias salvas: ${categoryMap.length}, Questões salvas: $savedQuestionsCount.',
+    );
+  } catch (e) {
+    debugPrint('[SEED] Erro geral durante o processo de seed: $e');
+  } finally {
+    _isSeeding = false;
+  }
 }
 
 void debugPrint(String msg) {
