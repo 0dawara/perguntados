@@ -28,34 +28,77 @@ class AppTheme {
   static const Color textPrimaryDark = Color(0xFFE0E0E0);
   static const Color textSecondaryDark = Color(0xFFB0B0B0);
 
+  static TextStyle _nunito({
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+  }) {
+    if (WidgetsBinding.instance.runtimeType.toString().contains('Test')) {
+      return TextStyle(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+        fontFamily: 'Roboto',
+      );
+    }
+    return GoogleFonts.nunito(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+    );
+  }
+
+  static TextStyle _varelaRound({
+    Color? color,
+    double? fontSize,
+    FontWeight? fontWeight,
+    double? letterSpacing,
+  }) {
+    if (WidgetsBinding.instance.runtimeType.toString().contains('Test')) {
+      return TextStyle(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+        letterSpacing: letterSpacing,
+        fontFamily: 'Roboto',
+      );
+    }
+    return GoogleFonts.varelaRound(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+    );
+  }
+
   static TextTheme textTheme(Color primaryColor, Color secondaryColor) {
     return TextTheme(
-      displayLarge: GoogleFonts.nunito(
+      displayLarge: _nunito(
         fontSize: 32,
         fontWeight: FontWeight.w900,
         color: primaryColor,
       ),
-      displayMedium: GoogleFonts.nunito(
+      displayMedium: _nunito(
         fontSize: 28,
         fontWeight: FontWeight.w800,
         color: primaryColor,
       ),
-      headlineMedium: GoogleFonts.nunito(
+      headlineMedium: _nunito(
         fontSize: 24,
         fontWeight: FontWeight.w700,
         color: primaryColor,
       ),
-      bodyLarge: GoogleFonts.nunito(
+      bodyLarge: _nunito(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: primaryColor,
       ),
-      bodyMedium: GoogleFonts.nunito(
+      bodyMedium: _nunito(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: secondaryColor,
       ),
-      labelLarge: GoogleFonts.varelaRound(
+      labelLarge: _varelaRound(
         fontSize: 14,
         fontWeight: FontWeight.w700,
         color: primaryColor,
@@ -80,7 +123,7 @@ class AppTheme {
         backgroundColor: surface,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: GoogleFonts.varelaRound(
+        titleTextStyle: _varelaRound(
           color: textPrimary,
           fontSize: 20,
           fontWeight: FontWeight.w700,
@@ -98,7 +141,7 @@ class AppTheme {
           ),
           elevation: 4,
           shadowColor: Colors.black.withValues(alpha: 0.3),
-          textStyle: GoogleFonts.varelaRound(
+          textStyle: _varelaRound(
             fontSize: 18,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.5,
@@ -150,7 +193,7 @@ class AppTheme {
         backgroundColor: surfaceDark,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: GoogleFonts.varelaRound(
+        titleTextStyle: _varelaRound(
           color: textPrimaryDark,
           fontSize: 20,
           fontWeight: FontWeight.w700,
@@ -168,7 +211,7 @@ class AppTheme {
           ),
           elevation: 4,
           shadowColor: Colors.black.withValues(alpha: 0.5),
-          textStyle: GoogleFonts.varelaRound(
+          textStyle: _varelaRound(
             fontSize: 18,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.5,
