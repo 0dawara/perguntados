@@ -8,7 +8,7 @@ Este documento centraliza as definições do projeto para a **Entrega 1** confor
 - **Desenvolvedor Backend:** THIAGO LEAL MENEZES - Foco na configuração do Back4App, criação das classes e lógica da API para o jogo.
 - **Desenvolvedor Frontend:** THIAGO LEAL MENEZES - Responsável pela implementação da lógica do jogo e da interface no Flutter.
 - **Especialista em Banco de Dados:** IGOR OLIVEIRA DA SILVA - Modelagem das estruturas de dados no Back4App (User, Category, Question, etc.).
-- **DevOps & Versionamento:** GUILHERME DOS SANTOS ALMEIDA - Gerencia o repositório no GitHub, estrutura de branches, Pull Requests e pipelines de deploy (Vercel).
+- **DevOps & Versionamento:** IGOR OLIVEIRA DA SILVA - Gerencia o repositório no GitHub, estrutura de branches, Pull Requests e pipelines de deploy (Vercel).
 
 ## 2. Projeto
 
