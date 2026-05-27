@@ -34,6 +34,10 @@ class GameRepository {
     if (currentUser != null) {
       final currentScore = currentUser.get<num>('totalScore') ?? 0;
       currentUser.set('totalScore', currentScore + points);
+      
+      final acl = ParseACL(owner: currentUser)..setPublicReadAccess(allowed: true);
+      currentUser.setACL(acl);
+      
       await currentUser.save();
     }
   }
@@ -41,7 +45,7 @@ class GameRepository {
   Future<List<ParseObject>> getLeaderboard() async {
     final query = QueryBuilder<ParseUser>(ParseUser.forQuery())
       ..orderByDescending('totalScore')
-      ..setLimit(10);
+      ..setLimit(1000);
 
     final response = await query.query();
 

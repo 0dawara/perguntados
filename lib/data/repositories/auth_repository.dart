@@ -8,6 +8,8 @@ class AuthRepository {
 
   Future<ParseResponse> signUp(String username, String password, String email) async {
     final user = ParseUser(username, password, email)..set('totalScore', 0);
+    final acl = ParseACL()..setPublicReadAccess(allowed: true);
+    user.setACL(acl);
     return await user.signUp();
   }
 
