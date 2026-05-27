@@ -14,6 +14,9 @@ Future<void> seedDatabase({bool force = false}) async {
   _isSeeding = true;
 
   try {
+    Map<String, ParseObject> categoryMap = {};
+    Set<String> existingQuestions = {};
+
     if (force) {
       debugPrint('[SEED] Forçando limpeza do banco de dados...');
 
@@ -56,15 +59,30 @@ Future<void> seedDatabase({bool force = false}) async {
       }
       debugPrint('[SEED] Limpeza concluída.');
     } else {
-      // Verify if categories already exist
-      final query = QueryBuilder<ParseObject>(ParseObject('Category'));
-      final countResponse = await query.count();
-      if (countResponse.success && countResponse.count > 0) {
-        debugPrint(
-          '[SEED] Banco de dados já possui categorias. Sincronização ignorada.',
-        );
-        _isSeeding = false;
-        return;
+      debugPrint('[SEED] Carregando categorias existentes do banco...');
+      final catQuery = QueryBuilder<ParseObject>(ParseObject('Category'))
+        ..setLimit(1000);
+      final catRes = await catQuery.query();
+      if (catRes.success && catRes.results != null) {
+        for (var cat in catRes.results as List<ParseObject>) {
+          final name = cat.get<String>('name');
+          if (name != null) {
+            categoryMap[name] = cat;
+          }
+        }
+      }
+
+      debugPrint('[SEED] Carregando questões existentes do banco...');
+      final qQuery = QueryBuilder<ParseObject>(ParseObject('Question'))
+        ..setLimit(1000);
+      final qRes = await qQuery.query();
+      if (qRes.success && qRes.results != null) {
+        for (var q in qRes.results as List<ParseObject>) {
+          final text = q.get<String>('text');
+          if (text != null) {
+            existingQuestions.add(text);
+          }
+        }
       }
     }
 
@@ -80,20 +98,22 @@ Future<void> seedDatabase({bool force = false}) async {
       '[SEED] Encontradas ${categoriesData.length} categorias no JSON.',
     );
 
-    Map<String, ParseObject> categoryMap = {};
-
     for (var cat in categoriesData) {
-      debugPrint('[SEED] Salvando categoria: ${cat['name']}...');
+      final name = cat['name'] as String;
+      if (categoryMap.containsKey(name)) {
+        continue;
+      }
+      debugPrint('[SEED] Salvando categoria: $name...');
       final obj = ParseObject('Category')
-        ..set('name', cat['name'])
+        ..set('name', name)
         ..set('color', cat['color']);
 
       final res = await obj.save();
       if (res.success) {
-        categoryMap[cat['name']] = obj; // Reference with objectId
+        categoryMap[name] = obj; // Reference with objectId
       } else {
         debugPrint(
-          '[SEED] Erro ao salvar categoria ${cat['name']}: ${res.error?.message}',
+          '[SEED] Erro ao salvar categoria $name: ${res.error?.message}',
         );
       }
     }
@@ -103,20 +123,27 @@ Future<void> seedDatabase({bool force = false}) async {
     debugPrint('[SEED] Encontradas ${questionsData.length} questões no JSON.');
 
     int savedQuestionsCount = 0;
+    int skippedQuestionsCount = 0;
     for (int i = 0; i < questionsData.length; i++) {
       var q = questionsData[i];
+      final qText = q['text'] as String;
+      if (existingQuestions.contains(qText)) {
+        skippedQuestionsCount++;
+        continue;
+      }
+
       final categoryName = q['category'];
       final catPointer = categoryMap[categoryName]?.toPointer();
 
       if (catPointer == null) {
         debugPrint(
-          '[SEED] AVISO: Categoria "$categoryName" não encontrada para a questão: ${q['text']}',
+          '[SEED] AVISO: Categoria "$categoryName" não encontrada para a questão: $qText',
         );
         continue;
       }
 
       final obj = ParseObject('Question')
-        ..set('text', q['text'])
+        ..set('text', qText)
         ..set('category', catPointer)
         ..set('options', List<String>.from(q['options']))
         ..set('correctAnswerIndex', q['correctAnswerIndex']);
@@ -125,7 +152,7 @@ Future<void> seedDatabase({bool force = false}) async {
       if (res.success) {
         savedQuestionsCount++;
         debugPrint(
-          '[SEED] [${i + 1}/${questionsData.length}] Questão salva com sucesso: ${q['text']}',
+          '[SEED] [${i + 1}/${questionsData.length}] Questão salva com sucesso: $qText',
         );
       } else {
         debugPrint('[SEED] Erro ao salvar questão: ${res.error?.message}');
@@ -133,7 +160,7 @@ Future<void> seedDatabase({bool force = false}) async {
     }
 
     debugPrint(
-      '[SEED] Sincronização concluída! Categorias salvas: ${categoryMap.length}, Questões salvas: $savedQuestionsCount.',
+      '[SEED] Sincronização concluída! Categorias no mapa: ${categoryMap.length}, Novas questões salvas: $savedQuestionsCount (Existentes/Ignoradas: $skippedQuestionsCount).',
     );
   } catch (e) {
     debugPrint('[SEED] Erro geral durante o processo de seed: $e');

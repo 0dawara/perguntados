@@ -315,6 +315,105 @@
         "Donatello"
       ],
       "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual é o país mais populoso do mundo atualmente?",
+      "category": "Geografia",
+      "options": [
+        "China",
+        "Índia",
+        "Estados Unidos",
+        "Indonésia"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual é o elemento químico mais abundante no universo?",
+      "category": "Ciências",
+      "options": [
+        "Hélio",
+        "Oxigênio",
+        "Hidrogênio",
+        "Carbono"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual atleta é conhecido como o Rei do Futebol?",
+      "category": "Esportes",
+      "options": [
+        "Pelé",
+        "Maradona",
+        "Lionel Messi",
+        "Cristiano Ronaldo"
+      ],
+      "correctAnswerIndex": 0
+    },
+    {
+      "text": "Quem foi o principal líder do movimento pela independência da Índia?",
+      "category": "História",
+      "options": [
+        "Jawaharlal Nehru",
+        "Indira Gandhi",
+        "Subhas Chandra Bose",
+        "Mahatma Gandhi"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Qual cantor é amplamente reconhecido como o Rei do Pop?",
+      "category": "Pop",
+      "options": [
+        "Elvis Presley",
+        "Michael Jackson",
+        "Prince",
+        "Freddie Mercury"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem pintou a famosa obra 'O Grito'?",
+      "category": "Artes",
+      "options": [
+        "Claude Monet",
+        "Salvador Dalí",
+        "Vincent van Gogh",
+        "Edvard Munch"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Quantos anos durou a Guerra dos Cem Anos?",
+      "category": "Coroa",
+      "options": [
+        "100 anos",
+        "116 anos",
+        "99 anos",
+        "150 anos"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual é a velocidade aproximada da luz no vácuo?",
+      "category": "Coroa",
+      "options": [
+        "150.000 km/s",
+        "300.000 km/s",
+        "450.000 km/s",
+        "600.000 km/s"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem escreveu a clássica peça de teatro tragédia 'Hamlet'?",
+      "category": "Coroa",
+      "options": [
+        "William Shakespeare",
+        "Miguel de Cervantes",
+        "Luís de Camões",
+        "Dante Alighieri"
+      ],
+      "correctAnswerIndex": 0
     }
   ]
 }
