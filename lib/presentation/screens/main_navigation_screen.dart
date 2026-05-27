@@ -64,7 +64,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
     final List<Widget> pages = <Widget>[
       HomeScreen(currentUser: _currentUser),
-      const LeaderboardScreen(),
+      _selectedIndex == 1 ? const LeaderboardScreen() : const SizedBox.shrink(),
     ];
 
     return Scaffold(
