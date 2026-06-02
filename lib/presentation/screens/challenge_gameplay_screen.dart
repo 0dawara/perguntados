@@ -24,7 +24,10 @@ class _ChallengeGameplayScreenState extends State<ChallengeGameplayScreen> {
   void initState() {
     super.initState();
     _confettiController = ConfettiController(duration: const Duration(seconds: 3));
-    _viewModel = ChallengeGameplayViewModel(challenge: widget.challenge);
+    _viewModel = ChallengeGameplayViewModel(
+      challenge: widget.challenge,
+      onTimeOut: () => _showResult(false),
+    );
   }
 
   @override

@@ -24,7 +24,9 @@ class GameplayViewModel extends ChangeNotifier {
   bool get answered => _answered;
   int get timeLeft => _timeLeft;
 
-  GameplayViewModel({required this.category, GameRepository? repository})
+  final VoidCallback? onTimeOut;
+
+  GameplayViewModel({required this.category, GameRepository? repository, this.onTimeOut})
     : _repository = repository ?? GameRepository() {
     _loadQuestions();
   }
@@ -66,6 +68,7 @@ class GameplayViewModel extends ChangeNotifier {
       final points = category.name.toLowerCase() == 'coroa' ? 25 : 10;
       _repository.updateScore(-(points ~/ 2));
       notifyListeners();
+      onTimeOut?.call();
     }
   }
 

@@ -54,10 +54,13 @@ class ChallengeGameplayViewModel extends ChangeNotifier {
   int get myScore => isPlayer1 ? _challenge.player1Score : _challenge.player2Score;
   int get opponentScore => isPlayer1 ? _challenge.player2Score : _challenge.player1Score;
 
+  final VoidCallback? onTimeOut;
+
   ChallengeGameplayViewModel({
     required ChallengeModel challenge,
     GameRepository? gameRepository,
     ChallengeRepository? challengeRepository,
+    this.onTimeOut,
   })  : _challenge = challenge,
         _gameRepository = gameRepository ?? GameRepository(),
         _challengeRepository = challengeRepository ?? ChallengeRepository() {
@@ -132,9 +135,10 @@ class ChallengeGameplayViewModel extends ChangeNotifier {
     });
   }
 
-  void _handleTimeOut() {
+  void _handleTimeOut() async {
     if (!_answered) {
-      answerQuestion(-1); // -1 or null means timeout/wrong
+      await answerQuestion(-1); // -1 or null means timeout/wrong
+      onTimeOut?.call();
     }
   }
 

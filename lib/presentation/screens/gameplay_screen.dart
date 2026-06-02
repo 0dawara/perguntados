@@ -27,7 +27,10 @@ class _GameplayScreenState extends State<GameplayScreen> {
     _confettiController = ConfettiController(
       duration: const Duration(seconds: 3),
     );
-    _viewModel = GameplayViewModel(category: widget.category);
+    _viewModel = GameplayViewModel(
+      category: widget.category,
+      onTimeOut: () => _showResult(false),
+    );
   }
 
   @override
