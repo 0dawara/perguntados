@@ -17,11 +17,11 @@ jobs:
           - target: android
             os: ubuntu-latest
           - target: ios
-            os: macos-latest
+            os: macos-15
           - target: windows
             os: windows-latest
           - target: macos
-            os: macos-latest
+            os: macos-15
           - target: linux
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
