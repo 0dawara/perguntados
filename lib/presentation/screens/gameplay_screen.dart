@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:confetti/confetti.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_theme.dart';
-import '../../utils/sound_manager.dart';
+
 import '../../data/models/category_model.dart';
 import '../viewmodels/gameplay_viewmodel.dart';
 import '../widgets/responsive_layout.dart';
@@ -47,9 +47,6 @@ class _GameplayScreenState extends State<GameplayScreen> {
 
     if (isCorrect) {
       _confettiController.play();
-      SoundManager.playCorrect();
-    } else {
-      SoundManager.playIncorrect();
     }
 
     if (!mounted) return;
