@@ -24,8 +24,8 @@ class GameplayViewModel extends ChangeNotifier {
   bool get answered => _answered;
   int get timeLeft => _timeLeft;
 
-  GameplayViewModel({required this.category, GameRepository? repository}) 
-      : _repository = repository ?? GameRepository() {
+  GameplayViewModel({required this.category, GameRepository? repository})
+    : _repository = repository ?? GameRepository() {
     _loadQuestions();
   }
 
@@ -63,6 +63,8 @@ class GameplayViewModel extends ChangeNotifier {
     if (!_answered) {
       _answered = true;
       _selectedAnswerIndex = -1;
+      final points = category.name.toLowerCase() == 'coroa' ? 25 : 10;
+      _repository.updateScore(-(points ~/ 2));
       notifyListeners();
     }
   }
@@ -76,9 +78,11 @@ class GameplayViewModel extends ChangeNotifier {
     notifyListeners();
 
     final isCorrect = (index == _currentQuestion?.correctAnswerIndex);
+    final points = category.name.toLowerCase() == 'coroa' ? 25 : 10;
     if (isCorrect) {
-      final points = category.name.toLowerCase() == 'coroa' ? 25 : 10;
       _repository.updateScore(points);
+    } else {
+      _repository.updateScore(-(points ~/ 2));
     }
     return isCorrect;
   }
