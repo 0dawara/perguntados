@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import '../../data/models/challenge_model.dart';
@@ -13,6 +14,8 @@ class ChallengesViewModel extends ChangeNotifier {
   List<ParseUser> _users = [];
   List<ChallengeModel> _myTurnChallenges = [];
   List<ChallengeModel> _theirTurnChallenges = [];
+  
+  Timer? _refreshTimer;
 
   bool get isLoading => _isLoading;
   bool get isCreating => _isCreating;
@@ -29,15 +32,33 @@ class ChallengesViewModel extends ChangeNotifier {
   Future<void> _init() async {
     _currentUser = await ParseUser.currentUser() as ParseUser?;
     await refreshData();
+    _startAutoRefresh();
   }
 
-  Future<void> refreshData() async {
-    _isLoading = true;
-    notifyListeners();
+  void _startAutoRefresh() {
+    _refreshTimer?.cancel();
+    // Atualiza os dados a cada 10 segundos em segundo plano
+    _refreshTimer = Timer.periodic(const Duration(seconds: 10), (_) {
+      refreshData(showLoading: false);
+    });
+  }
 
-    _users = await _repository.getUsersToChallenge();
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> refreshData({bool showLoading = true}) async {
+    if (showLoading) {
+      _isLoading = true;
+      notifyListeners();
+    }
+
+    final newUsers = await _repository.getUsersToChallenge();
     final allActive = await _repository.getActiveChallenges();
     
+    _users = newUsers;
     _myTurnChallenges = [];
     _theirTurnChallenges = [];
 
@@ -58,7 +79,9 @@ class ChallengesViewModel extends ChangeNotifier {
       }
     }
 
-    _isLoading = false;
+    if (showLoading) {
+      _isLoading = false;
+    }
     notifyListeners();
   }
 
