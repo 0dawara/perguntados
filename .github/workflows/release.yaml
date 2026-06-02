@@ -1,0 +1,122 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    strategy:
+      matrix:
+        include:
+          - target: android
+            os: ubuntu-latest
+          - target: ios
+            os: macos-latest
+          - target: windows
+            os: windows-latest
+          - target: macos
+            os: macos-latest
+          - target: linux
+            os: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java (for Android)
+        if: matrix.target == 'android'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Linux dependencies
+        if: matrix.target == 'linux'
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build libgtk-3-dev
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Build Android APK
+        if: matrix.target == 'android'
+        run: flutter build apk
+
+      - name: Build iOS (No Codesign)
+        if: matrix.target == 'ios'
+        run: flutter build ios --release --no-codesign
+
+      - name: Package iOS
+        if: matrix.target == 'ios'
+        run: |
+          mkdir -p Payload
+          mv build/ios/iphoneos/Runner.app Payload/
+          zip -qq -r -9 perguntados-ios.ipa Payload
+
+      - name: Build Windows
+        if: matrix.target == 'windows'
+        run: flutter build windows
+
+      - name: Package Windows
+        if: matrix.target == 'windows'
+        run: Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath perguntados-windows.zip
+
+      - name: Build macOS
+        if: matrix.target == 'macos'
+        run: flutter build macos
+
+      - name: Package macOS
+        if: matrix.target == 'macos'
+        run: ditto -c -k --sequesterRsrc --keepParent build/macos/Build/Products/Release/perguntados.app perguntados-macos.zip
+
+      - name: Build Linux
+        if: matrix.target == 'linux'
+        run: flutter build linux
+
+      - name: Package Linux
+        if: matrix.target == 'linux'
+        run: tar -czvf perguntados-linux.tar.gz -C build/linux/x64/release/bundle/ .
+
+      - name: Upload Android Release Asset
+        if: matrix.target == 'android'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload iOS Release Asset
+        if: matrix.target == 'ios'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: perguntados-ios.ipa
+
+      - name: Upload Windows Release Asset
+        if: matrix.target == 'windows'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: perguntados-windows.zip
+
+      - name: Upload macOS Release Asset
+        if: matrix.target == 'macos'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: perguntados-macos.zip
+
+      - name: Upload Linux Release Asset
+        if: matrix.target == 'linux'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: perguntados-linux.tar.gz
