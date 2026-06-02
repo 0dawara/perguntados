@@ -21,7 +21,15 @@ O **Perguntados** é uma aplicação multiplataforma focada em oferecer uma expe
 
 - Jogo baseado em múltiplas categorias de perguntas
 - Roleta animada via `flutter_fortune_wheel`
-- Animações e efeitos sonoros para engajamento (`audioplayers`, `confetti`)
+- Animações para engajamento (`confetti`)
+- Sistema de pontuação com penalidades para respostas incorretas
+- Temporizador ativo para respostas rápidas
+
+### ⚔️ Modo Desafio (Battle Mode)
+
+- Desafios em tempo real contra outros jogadores
+- Sincronização de status e recusa/aceitação de partidas
+- Comparação de resultados ao final de cada embate
 
 ### 🏆 Sistema de Ranking
 
@@ -53,7 +61,11 @@ O **Perguntados** é uma aplicação multiplataforma focada em oferecer uma expe
 - **[Google Fonts](https://pub.dev/packages/google_fonts)** — Tipografia personalizada
 - **[Flutter Fortune Wheel](https://pub.dev/packages/flutter_fortune_wheel)** — Componente de roleta
 - **[Confetti](https://pub.dev/packages/confetti)** — Efeitos de comemoração
-- **[Audioplayers](https://pub.dev/packages/audioplayers)** — Reprodução de sons de resposta
+
+### DevOps & Deploy
+
+- **GitHub Actions** — Pipeline automatizado de CI/CD para Mobile e Desktop (Android, iOS, Windows, macOS e Linux)
+- **Vercel** — Hospedagem para a versão Web do aplicativo
 
 ---
 
@@ -93,6 +105,21 @@ Você pode executar o projeto em um simulador, emulador Android, ou na Web:
 
 ```bash
 flutter run
+```
+
+---
+
+## 🧪 Testes Automatizados
+
+O projeto conta com infraestrutura de testes automatizados:
+
+- **Testes de Unidade**: Cobertura das regras de negócio (ViewModels e Models).
+- **Testes de Widget**: Validação de componentes da interface do usuário e fluxos.
+
+Para rodar os testes:
+
+```bash
+flutter test
 ```
 
 ---
