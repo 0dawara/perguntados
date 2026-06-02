@@ -6,8 +6,8 @@ import '../../data/repositories/auth_repository.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  final GameRepository _gameRepository = GameRepository();
-  final AuthRepository _authRepository = AuthRepository();
+  final GameRepository _gameRepository;
+  final AuthRepository _authRepository;
   
   List<CategoryModel> _categories = [];
   bool _isLoading = true;
@@ -23,7 +23,9 @@ class HomeViewModel extends ChangeNotifier {
   int? get selectedIndex => _selectedIndex;
   Stream<int> get selectedStream => _selectedController.stream;
 
-  HomeViewModel(ParseUser? user) {
+  HomeViewModel(ParseUser? user, {GameRepository? gameRepository, AuthRepository? authRepository})
+      : _gameRepository = gameRepository ?? GameRepository(),
+        _authRepository = authRepository ?? AuthRepository() {
     _currentScore = user?.get<num>('totalScore') ?? 0;
     _loadCategories();
   }

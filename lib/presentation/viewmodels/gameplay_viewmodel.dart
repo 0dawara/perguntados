@@ -6,7 +6,7 @@ import '../../data/models/question_model.dart';
 import '../../data/repositories/game_repository.dart';
 
 class GameplayViewModel extends ChangeNotifier {
-  final GameRepository _repository = GameRepository();
+  final GameRepository _repository;
   final CategoryModel category;
 
   List<QuestionModel> _questions = [];
@@ -24,7 +24,8 @@ class GameplayViewModel extends ChangeNotifier {
   bool get answered => _answered;
   int get timeLeft => _timeLeft;
 
-  GameplayViewModel({required this.category}) {
+  GameplayViewModel({required this.category, GameRepository? repository}) 
+      : _repository = repository ?? GameRepository() {
     _loadQuestions();
   }
 

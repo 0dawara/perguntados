@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import '../../data/repositories/auth_repository.dart';
 
 class AuthViewModel extends ChangeNotifier {
-  final AuthRepository _repository = AuthRepository();
+  final AuthRepository _repository;
   bool _isLoading = false;
   bool _isLogin = true;
 
   bool get isLoading => _isLoading;
   bool get isLogin => _isLogin;
+
+  AuthViewModel({AuthRepository? repository}) : _repository = repository ?? AuthRepository();
 
   void toggleAuthMode() {
     _isLogin = !_isLogin;
