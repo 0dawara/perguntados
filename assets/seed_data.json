@@ -414,6 +414,391 @@
         "Dante Alighieri"
       ],
       "correctAnswerIndex": 0
+    },
+    {
+      "text": "Qual a capital do Japão?",
+      "category": "Geografia",
+      "options": [
+        "Tóquio",
+        "Pequim",
+        "Seul",
+        "Bangkok"
+      ],
+      "correctAnswerIndex": 0
+    },
+    {
+      "text": "Qual o rio mais longo do mundo?",
+      "category": "Geografia",
+      "options": [
+        "Rio Amazonas",
+        "Rio Nilo",
+        "Rio Yangtzé",
+        "Rio Mississipi"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual o país mais extenso da América do Sul?",
+      "category": "Geografia",
+      "options": [
+        "Argentina",
+        "Brasil",
+        "Colômbia",
+        "Peru"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Em qual país se localiza a Torre Eiffel?",
+      "category": "Geografia",
+      "options": [
+        "Inglaterra",
+        "Espanha",
+        "Itália",
+        "França"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Qual o menor país do mundo?",
+      "category": "Geografia",
+      "options": [
+        "Mônaco",
+        "Vaticano",
+        "San Marino",
+        "Liechtenstein"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual a estrela mais próxima da Terra?",
+      "category": "Ciências",
+      "options": [
+        "Sirius",
+        "Alpha Centauri",
+        "Sol",
+        "Estrela do Norte"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual o osso mais longo do corpo humano?",
+      "category": "Ciências",
+      "options": [
+        "Tíbia",
+        "Fêmur",
+        "Úmero",
+        "Rádio"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual gás as plantas absorvem durante a fotossíntese?",
+      "category": "Ciências",
+      "options": [
+        "Oxigênio",
+        "Nitrogênio",
+        "Dióxido de carbono",
+        "Monóxido de carbono"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual cientista desenvolveu a lei da gravitação universal?",
+      "category": "Ciências",
+      "options": [
+        "Albert Einstein",
+        "Isaac Newton",
+        "Galileu Galilei",
+        "Johannes Kepler"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual parte da célula controla suas atividades?",
+      "category": "Ciências",
+      "options": [
+        "Citoplasma",
+        "Membrana celular",
+        "Ribossomo",
+        "Núcleo"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Qual país tem mais títulos na Copa do Mundo de Futebol?",
+      "category": "Esportes",
+      "options": [
+        "Alemanha",
+        "Itália",
+        "Brasil",
+        "Argentina"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "No basquete, de quantos pontos vale um arremesso convertido antes da linha de 3?",
+      "category": "Esportes",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual o nome do esporte em que os atletas usam luvas e lutam em um ringue?",
+      "category": "Esportes",
+      "options": [
+        "Karatê",
+        "Judô",
+        "Boxe",
+        "Taekwondo"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Quantos buracos tem um campo de golfe padrão?",
+      "category": "Esportes",
+      "options": [
+        "9",
+        "18",
+        "27",
+        "36"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual tenista é conhecido como o 'Rei do Saibro'?",
+      "category": "Esportes",
+      "options": [
+        "Roger Federer",
+        "Novak Djokovic",
+        "Andy Murray",
+        "Rafael Nadal"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Quem foi o líder do Império Romano assassinado nos Idos de Março?",
+      "category": "História",
+      "options": [
+        "Augusto",
+        "Júlio César",
+        "Nero",
+        "Calígula"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual civilização construiu Machu Picchu?",
+      "category": "História",
+      "options": [
+        "Astecas",
+        "Maias",
+        "Incas",
+        "Egípcios"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "A Guerra Fria foi um conflito político e ideológico entre quais potências?",
+      "category": "História",
+      "options": [
+        "Alemanha e França",
+        "Estados Unidos e União Soviética",
+        "Inglaterra e Espanha",
+        "China e Japão"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Quem foi o primeiro homem a pisar na Lua?",
+      "category": "História",
+      "options": [
+        "Yuri Gagarin",
+        "Neil Armstrong",
+        "Buzz Aldrin",
+        "Michael Collins"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Em que país ocorreu a Revolução Industrial?",
+      "category": "História",
+      "options": [
+        "França",
+        "Alemanha",
+        "Inglaterra",
+        "Estados Unidos"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual o nome do bruxo protagonista criado por J.K. Rowling?",
+      "category": "Pop",
+      "options": [
+        "Harry Potter",
+        "Percy Jackson",
+        "Frodo Bolseiro",
+        "Luke Skywalker"
+      ],
+      "correctAnswerIndex": 0
+    },
+    {
+      "text": "Qual banda de rock britânica era formada por John, Paul, George e Ringo?",
+      "category": "Pop",
+      "options": [
+        "The Rolling Stones",
+        "The Who",
+        "Queen",
+        "The Beatles"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Em qual cidade se passa a maior parte da série 'Stranger Things'?",
+      "category": "Pop",
+      "options": [
+        "Riverdale",
+        "Hawkins",
+        "Gotham",
+        "Metropolis"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual princesa da Disney perde o sapatinho de cristal?",
+      "category": "Pop",
+      "options": [
+        "Bela",
+        "Ariel",
+        "Cinderela",
+        "Branca de Neve"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Quem canta a música 'Shape of You'?",
+      "category": "Pop",
+      "options": [
+        "Justin Bieber",
+        "Shawn Mendes",
+        "Bruno Mars",
+        "Ed Sheeran"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Qual artista holandês cortou a própria orelha?",
+      "category": "Artes",
+      "options": [
+        "Pablo Picasso",
+        "Vincent van Gogh",
+        "Claude Monet",
+        "Salvador Dalí"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Como se chama a arte de dobrar papel sem o uso de tesoura ou cola?",
+      "category": "Artes",
+      "options": [
+        "Kirigami",
+        "Macramê",
+        "Origami",
+        "Decoupage"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Quem pintou 'A Última Ceia'?",
+      "category": "Artes",
+      "options": [
+        "Leonardo da Vinci",
+        "Michelangelo",
+        "Rafael",
+        "Sandro Botticelli"
+      ],
+      "correctAnswerIndex": 0
+    },
+    {
+      "text": "O Museu do Louvre fica em qual cidade?",
+      "category": "Artes",
+      "options": [
+        "Londres",
+        "Paris",
+        "Nova Iorque",
+        "Madri"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Que autor escreveu a obra 'Os Lusíadas'?",
+      "category": "Artes",
+      "options": [
+        "Fernando Pessoa",
+        "Eça de Queirós",
+        "Luís de Camões",
+        "José Saramago"
+      ],
+      "correctAnswerIndex": 2
+    },
+    {
+      "text": "Qual a capital da Islândia?",
+      "category": "Coroa",
+      "options": [
+        "Oslo",
+        "Reykjavik",
+        "Copenhague",
+        "Estocolmo"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual o animal mais rápido do mundo em terra firme?",
+      "category": "Coroa",
+      "options": [
+        "Leopardo",
+        "Guepardo",
+        "Antílope",
+        "Leão"
+      ],
+      "correctAnswerIndex": 1
+    },
+    {
+      "text": "Qual é o nome do medo de lugares fechados?",
+      "category": "Coroa",
+      "options": [
+        "Agorafobia",
+        "Acrofobia",
+        "Aracnofobia",
+        "Claustrofobia"
+      ],
+      "correctAnswerIndex": 3
+    },
+    {
+      "text": "Quem escreveu a obra 'A Divina Comédia'?",
+      "category": "Coroa",
+      "options": [
+        "Dante Alighieri",
+        "Maquiavel",
+        "Boccaccio",
+        "Petrarca"
+      ],
+      "correctAnswerIndex": 0
+    },
+    {
+      "text": "Em qual ano ocorreu a queda do Muro de Berlim?",
+      "category": "Coroa",
+      "options": [
+        "1985",
+        "1989",
+        "1991",
+        "1993"
+      ],
+      "correctAnswerIndex": 1
     }
   ]
 }
