@@ -5,6 +5,7 @@ import '../../core/theme/app_theme.dart';
 import '../../main.dart';
 import 'home_screen.dart';
 import 'leaderboard_screen.dart';
+import 'challenges_screen.dart';
 import '../../utils/seed_data.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -64,13 +65,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
     final List<Widget> pages = <Widget>[
       HomeScreen(currentUser: _currentUser),
-      _selectedIndex == 1 ? const LeaderboardScreen() : const SizedBox.shrink(),
+      _selectedIndex == 1 ? const ChallengesScreen() : const SizedBox.shrink(),
+      _selectedIndex == 2 ? const LeaderboardScreen() : const SizedBox.shrink(),
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _selectedIndex == 0 ? 'PERGUNTADOS' : 'RANKING',
+          _selectedIndex == 0 ? 'PERGUNTADOS' : _selectedIndex == 1 ? 'DESAFIOS' : 'RANKING',
           style: theme.textTheme.labelLarge?.copyWith(
             fontSize: 18,
           ),
@@ -132,6 +134,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               icon: Icon(Icons.home_rounded),
               activeIcon: Icon(Icons.home_rounded, size: 30),
               label: 'Início',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.group_rounded),
+              activeIcon: Icon(Icons.group_rounded, size: 30),
+              label: 'Desafios',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.emoji_events_rounded),
