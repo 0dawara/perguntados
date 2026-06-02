@@ -24,7 +24,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 3),
+    );
     _viewModel = GameplayViewModel(category: widget.category);
   }
 
@@ -43,7 +45,8 @@ class _GameplayScreenState extends State<GameplayScreen> {
   }
 
   Future<void> _showResult(bool isCorrect) async {
-    int pointsEarned = isCorrect ? (widget.category.name.toLowerCase() == 'coroa' ? 25 : 10) : 0;
+    int basePoints = widget.category.name.toLowerCase() == 'coroa' ? 25 : 10;
+    int pointsEarned = isCorrect ? basePoints : -(basePoints ~/ 2);
 
     if (isCorrect) {
       _confettiController.play();
@@ -63,7 +66,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
 
         return Center(
           child: Container(
-            constraints: BoxConstraints(maxWidth: isWide ? 500 : double.infinity),
+            constraints: BoxConstraints(
+              maxWidth: isWide ? 500 : double.infinity,
+            ),
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
               color: theme.colorScheme.surface,
@@ -98,7 +103,7 @@ class _GameplayScreenState extends State<GameplayScreen> {
                 Text(
                   isCorrect
                       ? 'VOCÊ GANHOU $pointsEarned PONTOS!'
-                      : 'VOCÊ ERROU OU O TEMPO ACABOU. TENTE NOVAMENTE!',
+                      : 'VOCÊ PERDEU ${-pointsEarned} PONTOS. TENTE NOVAMENTE!',
                   textAlign: TextAlign.center,
                   style: theme.textTheme.bodyLarge,
                 ),
@@ -108,8 +113,12 @@ class _GameplayScreenState extends State<GameplayScreen> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isCorrect ? AppTheme.correct : AppTheme.incorrect,
-                      shadowColor: (isCorrect ? AppTheme.correct : AppTheme.incorrect).withValues(alpha: 0.4),
+                      backgroundColor: isCorrect
+                          ? AppTheme.correct
+                          : AppTheme.incorrect,
+                      shadowColor:
+                          (isCorrect ? AppTheme.correct : AppTheme.incorrect)
+                              .withValues(alpha: 0.4),
                     ),
                     onPressed: () {
                       context.pop(); // Close sheet
@@ -189,20 +198,27 @@ class _GameplayScreenState extends State<GameplayScreen> {
                             _buildTimer(theme),
                             const SizedBox(height: 40),
                             Card(
-                              color: widget.category.color.withValues(alpha: 0.1),
+                              color: widget.category.color.withValues(
+                                alpha: 0.1,
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.all(24.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(widget.category.icon, color: widget.category.color, size: 28),
+                                    Icon(
+                                      widget.category.icon,
+                                      color: widget.category.color,
+                                      size: 28,
+                                    ),
                                     const SizedBox(width: 12),
                                     Text(
                                       widget.category.name.toUpperCase(),
-                                      style: theme.textTheme.titleLarge?.copyWith(
-                                        color: widget.category.color,
-                                        fontWeight: FontWeight.w900,
-                                      ),
+                                      style: theme.textTheme.titleLarge
+                                          ?.copyWith(
+                                            color: widget.category.color,
+                                            fontWeight: FontWeight.w900,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -231,11 +247,15 @@ class _GameplayScreenState extends State<GameplayScreen> {
             ),
           ),
         );
-      }
+      },
     );
   }
 
-  Widget _buildQuestionContent(ThemeData theme, var question, {required bool isWide}) {
+  Widget _buildQuestionContent(
+    ThemeData theme,
+    var question, {
+    required bool isWide,
+  }) {
     return Padding(
       padding: EdgeInsets.all(isWide ? 40.0 : 24.0),
       child: Column(
@@ -270,7 +290,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
             strokeWidth: 8,
             backgroundColor: theme.colorScheme.surfaceContainerHighest,
             valueColor: AlwaysStoppedAnimation<Color>(
-              _viewModel.timeLeft <= 5 ? AppTheme.incorrect : widget.category.color,
+              _viewModel.timeLeft <= 5
+                  ? AppTheme.incorrect
+                  : widget.category.color,
             ),
           ),
         ),
@@ -278,7 +300,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
           '${_viewModel.timeLeft}',
           style: theme.textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.w900,
-            color: _viewModel.timeLeft <= 5 ? AppTheme.incorrect : theme.colorScheme.onSurface,
+            color: _viewModel.timeLeft <= 5
+                ? AppTheme.incorrect
+                : theme.colorScheme.onSurface,
           ),
         ),
       ],
@@ -321,7 +345,9 @@ class _GameplayScreenState extends State<GameplayScreen> {
           } else {
             btnColor = theme.colorScheme.surfaceContainerLow;
             txtColor = theme.colorScheme.onSurface.withValues(alpha: 0.5);
-            borderColor = theme.colorScheme.outlineVariant.withValues(alpha: 0.5);
+            borderColor = theme.colorScheme.outlineVariant.withValues(
+              alpha: 0.5,
+            );
           }
         }
 
@@ -334,10 +360,17 @@ class _GameplayScreenState extends State<GameplayScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: btnColor,
                 foregroundColor: txtColor,
-                elevation: _viewModel.answered && (index == question.correctAnswerIndex || index == _viewModel.selectedAnswerIndex) ? 4 : 0,
+                elevation:
+                    _viewModel.answered &&
+                        (index == question.correctAnswerIndex ||
+                            index == _viewModel.selectedAnswerIndex)
+                    ? 4
+                    : 0,
                 side: BorderSide(color: borderColor, width: 2),
               ),
-              onPressed: _viewModel.answered ? null : () => _answerQuestion(index),
+              onPressed: _viewModel.answered
+                  ? null
+                  : () => _answerQuestion(index),
               child: Text(
                 question.options[index].toUpperCase(),
                 style: theme.textTheme.labelLarge?.copyWith(

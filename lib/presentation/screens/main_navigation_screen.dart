@@ -72,10 +72,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _selectedIndex == 0 ? 'PERGUNTADOS' : _selectedIndex == 1 ? 'DESAFIOS' : 'RANKING',
-          style: theme.textTheme.labelLarge?.copyWith(
-            fontSize: 18,
-          ),
+          _selectedIndex == 0
+              ? 'PERGUNTADOS'
+              : _selectedIndex == 1
+              ? 'DESAFIOS'
+              : 'RANKING',
+          style: theme.textTheme.labelLarge?.copyWith(fontSize: 18),
         ),
         actions: [
           ValueListenableBuilder<ThemeMode>(
@@ -83,11 +85,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             builder: (context, currentMode, child) {
               return IconButton(
                 icon: Icon(
-                  currentMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
+                  currentMode == ThemeMode.dark
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
                 ),
                 onPressed: () {
-                  PerguntadosApp.themeNotifier.value = 
-                      currentMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+                  PerguntadosApp.themeNotifier.value =
+                      currentMode == ThemeMode.dark
+                      ? ThemeMode.light
+                      : ThemeMode.dark;
                 },
                 tooltip: 'Alternar Tema',
               );
@@ -117,7 +123,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           backgroundColor: theme.colorScheme.surface,
           elevation: 0,
           selectedItemColor: AppTheme.geography,
-          unselectedItemColor: theme.brightness == Brightness.light 
+          unselectedItemColor: theme.brightness == Brightness.light
               ? AppTheme.textSecondary.withValues(alpha: 0.5)
               : AppTheme.textSecondaryDark.withValues(alpha: 0.5),
           selectedLabelStyle: theme.textTheme.labelLarge?.copyWith(
