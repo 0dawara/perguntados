@@ -41,6 +41,12 @@ O **Perguntados** é uma aplicação multiplataforma focada em oferecer uma expe
 - Sistema de login e autenticação integrado
 - Gerenciamento de estado de usuário seguro
 
+### 📱 Design Responsivo e UI
+
+- Layout adaptativo para Mobile, Tablet e Desktop
+- Navegação com barra inferior intuitiva
+- Temas Material 3 e paleta de cores unificada por categoria
+
 ---
 
 ## 🛠️ Stack Técnica
@@ -150,7 +156,7 @@ perguntados/
 
 1. Usuário abre o app e faz o login/cadastro.
 2. Acessa a tela principal e inicia o quiz (gira a roleta).
-3. Responde a uma pergunta por categoria. O App emite feedback sonoro e visual.
+3. Responde a uma pergunta por categoria. O App emite feedback visual.
 4. Pontuação calculada e enviada para o Back4App.
 5. Usuário visualiza o seu resultado e ranking.
 

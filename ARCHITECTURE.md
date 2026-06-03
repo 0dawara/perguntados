@@ -74,6 +74,8 @@ O backend é abstraído usando o SDK do Parse. Os objetos no aplicativo mapeiam 
 ```mermaid
 erDiagram
     User ||--o{ Score : registra
+    User ||--o{ Challenge : participa
+    Category ||--o{ Question : possui
     Question }o--o{ Score : responde
 
     User {
@@ -84,15 +86,19 @@ erDiagram
         Date createdAt
     }
 
+    Category {
+        string objectId PK
+        string name
+        string color
+        string icon
+    }
+
     Question {
         string objectId PK
         string text "O enunciado"
-        string optionA
-        string optionB
-        string optionC
-        string optionD
-        string correctAnswer
-        string difficulty "easy, medium, hard"
+        List options
+        int correctAnswerIndex
+        Pointer category FK "ref Category"
     }
 
     Score {
@@ -100,6 +106,18 @@ erDiagram
         Pointer userId FK "ref _User"
         number points
         Date playedAt
+    }
+
+    Challenge {
+        string objectId PK
+        Pointer player1 FK "ref _User"
+        Pointer player2 FK "ref _User"
+        number player1Score
+        number player2Score
+        Pointer currentTurn FK "ref _User"
+        string status "active, completed, expired"
+        Date deadline
+        Pointer winner FK "ref _User"
     }
 ```
 
