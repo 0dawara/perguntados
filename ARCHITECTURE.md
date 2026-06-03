@@ -16,11 +16,11 @@ graph LR
     ParseSDK["📦 Parse SDK<br/>(Data Layer)"]
     Back4App["🗄️ Back4App<br/>(Parse Server)"]
 
-    Flutter -->|Exibe telas| GoRouter
-    GoRouter -->|Acessa ViewModel| State
-    State -->|Gerencia Estado| Flutter
-    State -->|Chama Repositório| ParseSDK
-    ParseSDK -->|HTTPS (REST)| Back4App
+    Flutter -- "Exibe telas" --> GoRouter
+    GoRouter -- "Acessa ViewModel" --> State
+    State -- "Gerencia Estado" --> Flutter
+    State -- "Chama Repositório" --> ParseSDK
+    ParseSDK -- "HTTPS (REST)" --> Back4App
 
     style Flutter fill:#61dafb
     style GoRouter fill:#02569b,color:#fff
